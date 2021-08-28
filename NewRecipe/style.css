@@ -1,0 +1,104 @@
+header
+{
+    margin-top: 100px;
+
+}
+#warp_header{
+    display: flex;
+    margin-left: calc(50% - 637px);
+    margin-bottom: 50px;
+}
+
+#style_title{
+    position: relative;
+    width: 500px;
+    height: 400px;
+    left: calc(50% - 550px);
+    background-image: url(https://www.pngkey.com/png/full/39-395294_earth-planet-drawing-at-getdrawings-world-clipart-transparent.png);
+    background-size: cover;
+}
+#tile_project{
+    position: absolute;
+    text-align: center;
+    top: 41%;
+    left: 8%;
+    color: white;
+    font-weight: bolder;
+    -webkit-text-stroke: 0.75px black;
+    font-size: 3.4rem;
+}
+h1 span {
+    margin-left: 134px;
+}
+/* Button Search */
+#barSeacrch{
+    position: absolute;
+    background: #fff;
+    display: flex;
+    border: 1px solid transparent;
+    box-shadow: 0 2px 5px 1px rgb(64 60 67 / 16%);
+    height: 39px;
+    width: 690px;
+    border-radius: 24px;
+    height: 44px;
+    margin: 0 auto;
+    font-size: 2rem;
+    cursor:pointer;
+    outline-width: 0;
+    bottom: 0;
+    left: calc(50% - 345px);
+}
+#search{
+    border: none;
+    font-family: inherit;
+    
+    font-size: inherit;
+    height: 100%;
+    outline: none;
+    padding-inline-end: 44px;
+    padding-inline-start: 52px;
+    width: 100%;
+    margin-left: 31px;
+}
+#btn_search{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 4px;
+    top: -3px;
+    background-color: transparent;
+    border: none;
+}
+#category_search{
+    width: 160px;
+    font-size: 1.5rem;
+    border: none;
+    border-left: 1px solid black;
+    padding-left: 13px;
+    padding-right: 20px;
+}
+#no_result{
+    font-size: 2rem;
+    color: red;
+    text-align: center;
+    margin-top: 20px;
+}
+#favorite{
+    width: 20%;
+    height: 500px;
+}
+
+#section_recipes{
+    width: 80vw;
+}
+#list_recipe{
+    display: flex;
+    margin-left: calc(50% - 440px);
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.btn-primary{
+    position: absolute;
+    top: 0px;
+    margin-top: -12px;
+}
