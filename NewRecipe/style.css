@@ -97,6 +97,10 @@ h1 span {
     flex-direction: row;
     flex-wrap: wrap;
 }
+#list_recipe .card:hover
+{
+    margin-top: -30px;
+}
 .btn-primary{
     position: absolute;
     top: 0px;

@@ -1,5 +1,4 @@
-let numberButton=0;
-localStorage.setItem('numberButton',numberButton);
+
 function userSearch() {
     let YOUR_APP_ID = `0a2cb16c`; 
     let YOUR_APP_KEY= `df317eac9cacca743c171812de787e94`;
@@ -28,19 +27,21 @@ function userSearch() {
 
 function cheackRecipe (Recipe)
 {
-
     if(Recipe.hits.length==0 )                        
     return document.getElementById('no_result').innerHTML="No result";        //cheacker if have resualt for
-else
-{
-    document.getElementById('no_result').innerText="";
-    printRecipes(Recipe)
-}
+    else
+    {
+        document.getElementById('no_result').innerText="";
+        printRecipes(Recipe)
+    }
 }
 function printRecipes(Recipe)
 {
     for (let i=0 ; i< Recipe.hits.length ; i++)
     {
+        let keyRecipe =Recipe.hits[i]._links.self.href;
+        let numberButton = keyRecipe.substring(keyRecipe.indexOf('v2/')+3,keyRecipe.lastIndexOf("?")-1);
+        console.log(numberButton);
     //Crate Elements
     let card = document.createElement('div');
     let card_img_top = document.createElement('img');
@@ -48,22 +49,21 @@ function printRecipes(Recipe)
     let card_title = document.createElement('h5');
     let card_text = document.createElement('p');
     let card_btn = document.createElement('button')
-
     let list_recipe =document.getElementById('list_recipe');
     let section_recipes = document.getElementById('section_recipes');
+
     //Add class to Elements
-    card.classList.add('card');
-    card_img_top.setAttribute("id", `card-img-top ${i}`);
+    card.classList.add(`card`,`${numberButton}`);
+    card_img_top.setAttribute("id", `card-img-top ${numberButton}`);
     card_body.classList.add('card-body');
     card_title.classList.add('card-title');
     card_text.classList.add('card-text');
-    card_btn.classList.add('btn','btn-primary');
+    card_btn.classList.add('btn',`btn-primary`,`${numberButton}`);
 
     //Properties
-  
     card_btn.innerHTML="Add Favorite";
     card_title.innerHTML = Recipe.hits[i].recipe.label;
-    //  Break text recipe to lines   
+    //Break text recipe to lines   
     card_text.innerHTML = Recipe.hits[i].recipe.ingredientLines.map((line_recipe)=>{   
         let line = line_recipe+"<br>";
         return line;
@@ -77,13 +77,12 @@ function printRecipes(Recipe)
     card.append(card_body);
     list_recipe.append(card);
     section_recipes.append(list_recipe);
-    document.getElementById(`card-img-top ${i}`).src = `${Recipe.hits[i].recipe.image}`;
+    document.getElementById(`card-img-top ${numberButton}`).src = `${Recipe.hits[i].recipe.image}`;
 
-
-    //Button Add To Favorite
+//Button Add To Favorite//
     card_btn.addEventListener('click',(event)=>{
-        favorite = document.getElementById('favorite');
-         //Crate Elements
+    favorite = document.getElementById('favorite');
+    //Crate Elements
     let card_fav = document.createElement('div');
     let card_img_top_fav = document.createElement('img');
     let card_body_fav = document.createElement('div');
@@ -91,11 +90,9 @@ function printRecipes(Recipe)
     let card_text_fav = document.createElement('p');
     let card_btn_fav = document.createElement('button')
 
-   let numberButton = card_img_top.id.slice(13,card_img_top.id.length)
-
     //Add class to Elements
-    card_fav.classList.add('card',"fav");
-    card_img_top_fav.setAttribute("id", `card-img-top ${numberButton}`);
+    card_fav.classList.add(`card`,`fav`,`${numberButton}`);
+    card_img_top_fav.setAttribute(`id`, `card-img-top ${numberButton}`);
     card_body_fav.classList.add('card-body');
     card_title_fav.classList.add('card-title');
     card_text_fav.classList.add('card-text');
@@ -105,18 +102,30 @@ function printRecipes(Recipe)
     //properties
     card_title_fav.innerText=card_title.innerText;
     card_text_fav.innerText=card_text.innerText;
-    // card_btn_fav=card_btn;
-    // card_img_top_fav=card_img_top;
-    // card_fav=card;
 
+    //Print to Favorite Site in DOM
     card_body_fav.append(card_title_fav);
     card_body_fav.append(card_text_fav);
     card_body_fav.append(card_btn_fav);
     card_fav.append(card_img_top_fav)
     card_fav.append(card_body_fav);
-        favorite.append(card_fav);
-        document.getElementById(`card-img-top ${numberButton}`).src = card_img_top.src
-        document.getElementById(`${numberButton}`).innerHTML = "remove";
+    favorite.append(card_fav);
+    
+    //add Text to Remove Button in Favorite Section
+    document.getElementById(`card-img-top ${numberButton}`).src = card_img_top.src
+    document.getElementById(`${numberButton}`).innerHTML = "remove";
+
+    // add to local host data
+    let dataSave = {"id":card_fav.className,"recipe":card_text_fav.innerText,"image":document.getElementById(`card-img-top ${numberButton}`).src }
+    localStorage.setItem(`ArryFavoriteRecipes${numberButton}`,JSON.stringify(dataSave));         
     })
     }
 }
+// //Print after user refresh the web, take data from local storage and print 
+// function startFavorite()
+// {
+//     console.log(localStorage.map((ArryFavoriteRecipes)=>{
+//         console.log(ArryFavoriteRecipes)
+//     }));
+// }
+// startFavorite();
