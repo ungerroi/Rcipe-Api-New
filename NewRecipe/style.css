@@ -1,7 +1,7 @@
 header
 {
-    margin-top: 100px;
-
+    background-image: url('https://previews.123rf.com/images/vell/vell1508/vell150800078/44194588-blank-book-recipes-and-various-spices-food-background-with-copyspace.jpg');
+    height: 20vh;
 }
 #warp_header{
     display: flex;
